@@ -28,12 +28,12 @@ int main()
     int count = 0;
 
     if (!readWindData("data.txt", records, count)) {
-        cout << "Ошибка загрузки файла!" << endl;
+        cout << "File upload error!" << endl;
         system("pause");
         return 1;
     }
 
-    cout << "Успешно загружено записей: " << count << endl;
+    cout << "Record successfully loaded: " << count << endl;
 
     int choice;
     do {
@@ -51,10 +51,10 @@ int main()
             filterBySpeed(records, count);
             break;
         case 0:
-            cout << "Выход..." << endl;
+            cout << "Exit..." << endl;
             break;
         default:
-            cout << "Неверный выбор!" << endl;
+            cout << "Not correct choose" << endl;
         }
     } while (choice != 0);
 
