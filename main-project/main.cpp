@@ -3,6 +3,8 @@
 #include "file_reader.h"
 #include "constants.h"
 #include "sort.h"
+#include "processing.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -12,6 +14,7 @@ void showMenu() {
     cout << "1. Show all entries" << endl;
     cout << "2. Filter: West/NorthWest/North" << endl;
     cout << "3. Filter: скорость > 5 м/с" << endl;
+    cout << "4. —редн€€ скорость ветра по мес€цу" << endl; // Ќќ¬џ… ѕ”Ќ “
     cout << "0. Exit" << endl;
     cout << "Choose: ";
 }
@@ -70,36 +73,19 @@ int main()
             filterBySpeed(records, count);
             break;
         case 4: {
-            int sortMethod, criteria;
+            int month;
+            cout << "¬ведите номер мес€ца (1-12): ";
+            cin >> month;
 
-            showSortMenu();
-            cin >> sortMethod;
+            double averageSpeed = calculateAverageSpeedInMonth(records, count, month);
 
-            showCriteriaMenu();
-            cin >> criteria;
-
-            // ¬ыбор функции сравнени€
-            int (*compareFunc)(const WindRecord*, const WindRecord*) = nullptr;
-            if (criteria == 1) {
-                compareFunc = compareBySpeedDesc;
-                cout << "Sort by speed descending..." << endl;
+            if (averageSpeed >= 0) {
+                cout << endl << "—редн€€ скорость ветра в мес€це " << month
+                    << ": " << fixed << setprecision(2) << averageSpeed << " м/с" << endl;
             }
-            else if (criteria == 2) {
-                compareFunc = compareByDirectionAsc;
-                cout << "Sort by direction/month/day..." << endl;
+            else {
+                cout << "Ќет данных дл€ мес€ца " << month << endl;
             }
-
-            // ¬ыбор метода сортировки и выполнение
-            if (sortMethod == 1) {
-                shakerSort(records, count, compareFunc);
-                cout << "Shaker sorting has been completed" << endl;
-            }
-            else if (sortMethod == 2) {
-                mergeSort(records, 0, count - 1, compareFunc);
-                cout << "Merge sort performed" << endl;
-            }
-
-            displayRecords(records, count);
             break;
         }
         case 0:
