@@ -77,11 +77,26 @@ int main()
             cout << "¬ведите номер мес€ца (1-12): ";
             cin >> month;
 
+            if (month < 1 || month > 12) {
+                cout << "Ќеверный номер мес€ца!" << endl;
+                break;
+            }
+
             double averageSpeed = calculateAverageSpeedInMonth(records, count, month);
 
             if (averageSpeed >= 0) {
                 cout << endl << "—редн€€ скорость ветра в мес€це " << month
                     << ": " << fixed << setprecision(2) << averageSpeed << " м/с" << endl;
+                cout << " оличество записей в мес€це: ";
+
+                // ѕодсчет записей дл€ информативности
+                int monthCount = 0;
+                for (int i = 0; i < count; i++) {
+                    if (records[i]->month == month) {
+                        monthCount++;
+                    }
+                }
+                cout << monthCount << endl;
             }
             else {
                 cout << "Ќет данных дл€ мес€ца " << month << endl;
