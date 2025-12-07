@@ -6,4 +6,7 @@
 bool readWindData(const char* filename, WindRecord* records[], int& count);
 void displayRecords(WindRecord* records[], int count);
 
+void filterByDirection(WindRecord* records[], int count);
+void filterBySpeed(WindRecord* records[], int count);
+
 #endif
