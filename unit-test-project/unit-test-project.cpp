@@ -37,7 +37,7 @@ namespace unittests
             int size = 3;
             int month = 1; // Ищем среднее для января
 
-            double result = calculateAverageSpeedInMonth(records, month, size);
+            double result = calculateAverageSpeedInMonth(records, size, month);
 
             // Ожидаем (10.0 + 20.0) / 2 = 15.0
             Assert::AreEqual(15.0, result, 0.001);
